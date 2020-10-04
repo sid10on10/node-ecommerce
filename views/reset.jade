@@ -1,0 +1,53 @@
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Reset
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    style.
+      .outerbox{
+      display: flex;
+      justify-content: center;
+      height:50%;
+      }
+      .innerbox{
+      width:80%;
+      height:100%;
+      }
+      body {
+            background-image: url('https://eskipaper.com/images/black-backgrounds-11.jpg');
+      }
+  body
+    .outerbox
+      .container.innerbox
+        h1(style='font-family: monospace;text-align: center;color:white;') Reset Page
+        h3(style='color:white;')#email #{email}
+        form(onsubmit='reset_pass();return false')
+          .form-group
+            label(for='password1' style="color:white;") New Password
+            input#password1.form-control(type='password', placeholder='Enter Password')
+          .form-group
+            label(for='password2' style="color:white;") Confirm Password
+            input#password2.form-control(type='password', placeholder='Password')
+          button.btn.btn-primary(type='submit') Change
+    script.
+      async function reset_pass(){
+      let email = document.getElementById("email").innerHTML
+      let password1 = document.getElementById("password1").value
+      let password2 = document.getElementById("password2").value
+      if(password1!=password2){
+      alert("Passwords don't match")
+      }else{
+      let data = {email,password:password1}
+      let resetData = await fetch("http://localhost:3000/reset_password",{
+      method:"POST",
+      body:JSON.stringify(data),
+      headers: {
+      'Content-Type': 'application/json'
+      }
+      })
+      let resetRes = await resetData.json()
+      alert(resetRes.message)
+      window.location.assign("https://urlshortener-sid.netlify.app/login.html")
+      }
+      }
