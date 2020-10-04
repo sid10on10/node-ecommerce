@@ -6,6 +6,25 @@ const jwt = require("jsonwebtoken")
 const mongodb = require("mongodb")
 const {authenticate} = require('../common/auth');
 
+router.get('/role',authenticate,async function(req,res){
+    let client;
+    try{
+        client = await mongodClient.connect(url)
+        let db = client.db("ecommerce")
+        let token = req.headers.authorization
+        let user = jwt.verify(token,"abcdefghijklmnopqrs")
+        let userID = user.id
+        let userData = await db.collection("users").findOne({_id:mongodb.ObjectId(userID)})
+        let role = userData["role"]
+        res.json({
+            role
+        })
+    }catch(error){
+        client.close()
+        console.log(error)
+    }
+})
+
 
 router.post('/addProducts',authenticate,async function(req,res,){
     let client;
