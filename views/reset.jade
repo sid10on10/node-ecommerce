@@ -39,7 +39,7 @@ html(lang='en')
       alert("Passwords don't match")
       }else{
       let data = {email,password:password1}
-      let resetData = await fetch("http://localhost:3000/reset_password",{
+      let resetData = await fetch("https://pathshala-ecommerce.herokuapp.com/reset_password",{
       method:"POST",
       body:JSON.stringify(data),
       headers: {
@@ -48,6 +48,6 @@ html(lang='en')
       })
       let resetRes = await resetData.json()
       alert(resetRes.message)
-      window.location.assign("https://urlshortener-sid.netlify.app/login.html")
+      window.location.assign("https://pathshala-ecommerce.netlify.app/login.html")
       }
       }
