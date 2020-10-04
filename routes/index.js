@@ -3,6 +3,7 @@ var router = express.Router();
 var mongodb = require("mongodb")
 var {url,mongodClient} = require("../config")
 const { sendEmail } = require('../common/mailer');
+const bcryptjs = require("bcryptjs");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
