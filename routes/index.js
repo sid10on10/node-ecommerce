@@ -6,7 +6,7 @@ const { sendEmail } = require('../common/mailer');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Pathshala E-commerce' });
 });
 
 router.post('/forgot_password', async function(req, res, next) {
